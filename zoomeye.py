@@ -40,6 +40,7 @@ class zoomeye_query():
                     break
                 print(colorama.Fore.YELLOW + f"正在爬取第{page}页数据：")
                 resp = requests.get(url=api,headers=headers,verify=False,params={"query": query,'page': page,'facet': facet}).text
+                page += 1
                 json_res = json.loads(resp)["matches"]
                 count = 1
                 for i in json_res:
@@ -52,14 +53,16 @@ class zoomeye_query():
 
 
             except Exception as e:
-                print(colorama.Fore.RED + "请看看是不是到达最大限度数目了")
+                print(colorama.Fore.RED + "请看看是不是到达最大限度数目了或者删掉access_token文件重新获取")
+                break
 
 
 
 
 if __name__ == '__main__':
     title()
-    parser = argparse.ArgumentParser("zoomeyetool made by yuejinjianke")
+    parser = argparse.ArgumentParser("plugin made by huxin")
+
 
     parser.add_argument(
         '-q','--query',
